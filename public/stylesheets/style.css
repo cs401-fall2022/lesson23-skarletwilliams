@@ -1,0 +1,59 @@
+html, body {
+  background-color: pink;
+  /* padding: 50px; */
+  font: 14px "Lucida Handwriting", cursive;
+  height: 100%
+}
+
+a {
+  color: #00B7FF;
+}
+
+div#sidebar {
+  vertical-align:top;
+  display: inline-block;
+  align-self: left;
+  text-align: center;
+  /* border: 5px solid  palevioletred; */
+  /* border-radius: 10px; */
+  border-right: 5px solid  #ff289a;
+  padding: 5px;
+  background-color: #ffcffd;
+  margin: 0px 10px 10px 10px;
+  min-width: 20%;
+  max-width: 30%;
+  height: 100%;
+}
+
+#main {
+  vertical-align:top;
+  display: inline-block;
+  align-self: right;
+  text-align: center;
+  width: 70%;
+  height: 100%;
+}
+
+h1 {
+  align-self: left;
+  text-align: left;
+  display: block;
+  padding: 20px 0px 0px 60px;
+  font-size: 36pt;
+  font-weight: 1000;
+  color: rgb(227, 252, 153);
+  text-shadow: 2px 4px #ff289a;
+}
+
+#header {
+  align-self: left;
+  text-align: left;
+  display: block;
+  padding: 0px 0px 30px 60px;
+  font-size: 16pt;
+  font-weight: 500;
+  color: rgb(248, 255, 228);
+  text-shadow: 1px 2px #ff72bd;
+
+}
+
