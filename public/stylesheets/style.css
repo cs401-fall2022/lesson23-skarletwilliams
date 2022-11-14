@@ -72,3 +72,17 @@ h1 {
   margin: 10px;
   background-color: #ffcffd;
 }
+
+.post_title {
+  display: block;
+  align-self: left;
+  text-align: left;
+  font-weight: bold;
+}
+
+.post_time {
+  display: block;
+  align-self: right;
+  text-align: right;
+  font-weight: light;
+}

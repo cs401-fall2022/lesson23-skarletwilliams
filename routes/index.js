@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
         (err, rows) => {
           if (rows.length === 1) {
             console.log("Table exists!");
-            db.all(` select blog_id, blog_txt from blog`, (err, rows) => {
+            db.all(` select blog_title, blog_txt, blog_time from blog`, (err, rows) => {
               console.log("returning " + rows.length + " records");
               res.render('index', { title: 'Express', data: rows });
             });
@@ -24,13 +24,15 @@ router.get('/', function (req, res, next) {
             console.log("Creating table and inserting some sample data");
             db.exec(`create table blog (
                      blog_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                     blog_txt text NOT NULL);
+                     blog_title text NOT NULL,
+                     blog_txt text NOT NULL,
+                     blog_time DATETIME NOT NULL DEFAULT(datetime('now')));
 
-                      insert into blog (blog_txt)
-                      values ('This is a great blog'),
-                             ('Oh my goodness blogging is fun');`,
+                      insert into blog (blog_title, blog_txt)
+                      values ('First Post', 'This is a great blog'),
+                             ('Second Post', 'Oh my goodness blogging is fun');`,
               () => {
-                db.all(` select blog_id, blog_txt from blog`, (err, rows) => {
+                db.all(` select blog_title, blog_txt, blog_time from blog`, (err, rows) => {
                   res.render('index', { title: 'Express', data: rows });
                 });
               });
@@ -53,8 +55,8 @@ router.post('/add', (req, res, next) => {
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
-      db.exec(`insert into blog ( blog_txt)
-                values ('${req.body.blog}');`)
+      db.exec(`insert into blog (blog_title, blog_txt)
+                values ('${req.body.title}', '${req.body.blog}');`)
       //redirect to homepage
       res.redirect('/');
     }
@@ -70,7 +72,7 @@ router.post('/delete', (req, res, next) => {
         console.log("Getting error " + err);
         exit(1);
       }
-      console.log("inserting " + req.body.blog);
+      console.log("deleting " + req.body.blog);
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.

@@ -8,11 +8,17 @@ block content
     #newPost
       form(action='/add' method='POST')
         div
+          label(for='blog') What is your blog title?
+          input#title(name='title' value='Title!')
+
           label(for='blog') What is your blog txt?
           input#blog(name='blog' value='Hi this is my blog text!')
         div
         button Send my blog
     #posts 
       ul
-        each txt in data
-          ul.single_post=txt.blog_txt
+        each txt in data.reverse()
+          ul.single_post
+            div.post_title #{txt.blog_title}
+            div.post_text #{txt.blog_txt}
+            div.post_time #{txt.blog_time}
