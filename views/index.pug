@@ -8,14 +8,28 @@ block content
     #newPost
       form(action='/add' method='POST')
         div
-          label(for='blog') What is your blog title?
-          input#title(name='title' value='Title!')
+          label(for='blog')
+          input#title(name='title' type='text' placeholder='Name your post!')
 
-          label(for='blog') What is your blog txt?
-          input#blog(name='blog' value='Hi this is my blog text!')
+          label(for='blog')
+          textarea#blog(name='blog' rows='1' cols='50' placeholder='Type here...')
+          
+          div#post
+            p Optional: Include a photo
+            label(for='pic')
+            input#pic(type='file' name='pic')
+
+            button Post!
+          div 
+
         div
-        button Send my blog
     #posts 
+      div#sort
+        p Sort by: 
+        select(name='Sort by:')
+          option(value='newest') Newest
+          option(value='oldest') Oldest
+      div
       ul
         each txt in data.reverse()
           ul.single_post

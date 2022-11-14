@@ -51,12 +51,13 @@ router.post('/add', (req, res, next) => {
         exit(1);
       }
       console.log("inserting " + req.body.blog);
+     
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
       db.exec(`insert into blog (blog_title, blog_txt)
-                values ('${req.body.title}', '${req.body.blog}');`)
+                values ("${req.body.title}", "${req.body.blog}");`)
       //redirect to homepage
       res.redirect('/');
     }
