@@ -6,7 +6,7 @@ I had a little bit of trouble getting myself to start week one, but I was able t
 <embed src="my-design.pdf" height=500 alt="Design Layout">
 <div>
 
-Sunday I decided to take a crack at actually designing the website, and I had a lot of fun. I was also able to figure out <i>some</i> of the database stuff. Not including how to stop sql injection, but everything basic. And I was able to add automatic time stamps and sort the posts in reverse order.
+Sunday I decided to take a crack at actually implementing the designed website, and I had a lot of fun. I was also able to figure out <i>some</i> of the database stuff. Not including how to stop sql injection, but everything basic. And I was able to add automatic time stamps and sort the posts in reverse order.
 
 <div>
 <img src="progress.png" alt="Week One Current Design">
