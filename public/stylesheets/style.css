@@ -85,7 +85,7 @@ h1 {
 }
 
 .post_title {
-  display: block;
+  display: inline-block;
   align-self: left;
   text-align: left;
   font-weight: bold;
@@ -99,6 +99,7 @@ h1 {
 }
 
 .post_text {
+  display: block;
   text-align: left;
   padding: 5px 0px 5px 20px;
   font-size: 14pt;
@@ -174,4 +175,16 @@ button, select {
   padding: 2px;
   margin: 2px;
   border-radius: 5px;
+}
+
+button#edit_button {
+  display: inline-block;
+  align-self: right;
+  text-align: right;
+}
+
+div#top {
+  display: flex;
+  justify-content: space-between;
+  border:4pt solid rgb(158, 17, 95);
 }

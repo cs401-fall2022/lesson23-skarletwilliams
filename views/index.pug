@@ -33,6 +33,8 @@ block content
       ul
         each txt in data.reverse()
           ul.single_post
-            div.post_title #{txt.blog_title}
+            div#top
+              div.post_title #{txt.blog_title}
+              button.edit_button Edit
             div.post_text #{txt.blog_txt}
             div.post_time #{txt.blog_time}
