@@ -68,7 +68,7 @@ router.post('/add', (req, res, next) => {
 })
 
 router.post('/delete', (req, res, next) => {
-  console.log("deleting stuff without checking if it is valid! SEND IT!");
+  console.log("You can only delete existing posts, so this should be safe enough.");
   var db = new sqlite3.Database('mydb.sqlite3',
     sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
     (err) => {
@@ -76,12 +76,12 @@ router.post('/delete', (req, res, next) => {
         console.log("Getting error " + err);
         exit(1);
       }
-      console.log("deleting " + req.body.blog + " with blog id " + req.body.id);
+      console.log("deleting post with blog id " + req.body.post_id);
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
-      db.exec(`delete from blog where blog_id='${req.body.id}';`);     
+      db.exec(`delete from blog where blog_id='${req.body.post_id}';`);     
       res.redirect('/');
     }
   );

@@ -118,7 +118,7 @@ h1 {
   font-family:'Courier New', Courier, monospace
 }
 
-#post {
+.post_bottom {
   align-self: right;
   text-align: right;
 }
@@ -127,6 +127,11 @@ h1 {
   align-self: right;
   text-align: right;
   padding-right: 20px;
+  font-size: 14pt;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#newPost, #editPost {
   font-size: 14pt;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -140,11 +145,9 @@ h1 {
   padding: 5px;
   margin: 10px;
   background-color: #ffcffd;
-  font-size: 14pt;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-input#new_title and {
+input#new_title, input.edit_title{
   display: block;
   align-self: left;
   text-align: left;
@@ -154,7 +157,7 @@ input#new_title and {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-textarea#new_blog{
+textarea#new_blog, textarea.edit_text{
   display: inline-block;
   align-self: left;
   text-align: left;
@@ -191,4 +194,5 @@ div#top {
 .post_id {
   visibility: hidden;
   height: 0pt;
+  width: 0pt;
 }

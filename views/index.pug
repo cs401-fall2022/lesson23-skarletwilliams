@@ -14,7 +14,7 @@ block content
           label(for='blog')
           textarea#new_blog(name='blog' rows='1' cols='50' required placeholder='Type here...')
           
-          div#post
+          div.post_bottom
             p Optional: Include a photo
             label(for='pic')
             input#pic(type='file' name='pic')
@@ -40,6 +40,7 @@ block content
                     label(for='blog')
                     input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
                     button(class='edit_button' type='submit') Edit
+                    button(class='delete_button' type="submit" formaction="/delete") Delete
                   div
               div.post_text #{txt.blog_txt}
               div.post_time #{txt.blog_time}
@@ -56,7 +57,7 @@ block content
                     label(for='blog')
                     input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
 
-                    div#post
+                    div.post_bottom
                       p Optional: Change photo
                       label(for='pic')
                       input#pic(type='file' name='pic')
