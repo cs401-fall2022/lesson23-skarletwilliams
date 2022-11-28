@@ -29,11 +29,11 @@ I figured out how to implement the update and delete functions. It worked exactl
 - New blog at top requires not-empty fields. Previously, you could spam the post button and clog the blog with numerous empty blogs. Now, they are required and won't allow empty posts.
 - Current Goals:
     - Allow photos to be inserted into posts
-    - Make the sort button work :)
-    - Refresh with an edit open OR clicking edit on a new post should close any other posts from editing.
+    - ~~Make the sort button work :)~~
+    - Refresh with an edit open OR ~~clicking edit on a new post~~ should close any other posts from editing.
     - Make the sidebar more visually interesting. It has been abandoned.
     - It would be nice if i could get the page to remember the scroll location on refresh
-    - If I still have time, add ~~authentication~~
+    - If I still have time, add ~authentication~
 
 <div>
 <img src="progress3.png" alt="Current Design with Up-date and Delete">

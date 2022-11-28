@@ -24,13 +24,15 @@ block content
         div
     #posts 
       div#sort
-        p Sort by: 
-        select(name='Sort by:')
-          option(value='newest') Newest
-          option(value='oldest') Oldest
+        form(action='/sort' method='POST')
+          p Sort by: 
+          select(id='Sortby' name='Sortby')
+            option#newest(name = 'newest' value='newest') Newest
+            option#oldest(name = 'oldest' value='oldest') Oldest
+          button(class='sort_button' type='submit') Sort
       div
       ul
-        each txt in data.reverse()
+        each txt in data
           ul(class="single_post", id=txt.blog_id)
             if txt.blog_edit == 0
               div#top

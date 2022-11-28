@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const sqlite3 = require('sqlite3').verbose()
+const sqlite3 = require('sqlite3').verbose();
+var sortby = "blog_id DESC";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -16,7 +17,7 @@ router.get('/', function (req, res, next) {
         (err, rows) => {
           if (rows.length === 1) {
             console.log("Table exists!");
-            db.all(` select blog_id, blog_edit, blog_title, blog_txt, blog_time from blog`, (err, rows) => {
+            db.all(` select blog_id, blog_edit, blog_title, blog_txt, blog_time from blog order by ${sortby}`, (err, rows) => {
               console.log("returning " + rows.length + " records");
               res.render('index', { title: 'Express', data: rows });
             });
@@ -52,7 +53,7 @@ router.post('/add', (req, res, next) => {
         exit(1);
       }
       console.log("inserting " + req.body.blog);
-     
+      
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
@@ -101,7 +102,8 @@ router.post('/edit', (req, res, next) => {
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
-      //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
+      //HINT: the answer is in the XKCD comic on the home page little bobby tables  :)
+      db.exec(`update blog set blog_edit=0 where blog_id!= ${req.body.post_id};`);     
       db.exec(`update blog set blog_edit=1 where blog_id=${req.body.post_id};`);     
       res.redirect('/');
     }
@@ -144,6 +146,32 @@ router.post('/update', (req, res, next) => {
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
       db.exec(`update blog set blog_title ='${req.body.edit_title}', blog_edit=0, blog_txt='${req.body.edit_text}', blog_time=datetime('now') where blog_id='${req.body.post_id}';`);     
+      res.redirect('/');
+    }
+  );
+})
+
+// Sort the posts 
+router.post('/sort', (req, res, next) => {
+  console.log("Sort the posts.");
+  var db = new sqlite3.Database('mydb.sqlite3',
+    sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+    (err) => {
+      if (err) {
+        console.log("Getting error " + err);
+        exit(1);
+      }
+      console.log("Sorting by: " + req.body.Sortby);
+
+      if(req.body.Sortby === "newest") {
+        sortby = "blog_id DESC";
+      } else if (req.body.Sortby === "oldest") {
+        sortby = "blog_id ASC";
+      }
+      //NOTE: This is dangerous! you need to sanitize input from the user
+      //this is ripe for a exploit! DO NOT use this in production :)
+      //Try and figure out how why this is unsafe and how to fix it.
+      //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
       res.redirect('/');
     }
   );
