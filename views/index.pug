@@ -9,19 +9,18 @@ block content
       form(action='/add' method='POST')
         div
           label(for='blog')
-          input#title(name='title' type='text' placeholder='Name your post!')
+          input#new_title(name='title' type='text' required placeholder='Name your post!')
 
           label(for='blog')
-          textarea#blog(name='blog' rows='1' cols='50' placeholder='Type here...')
+          textarea#new_blog(name='blog' rows='1' cols='50' required placeholder='Type here...')
           
           div#post
             p Optional: Include a photo
             label(for='pic')
             input#pic(type='file' name='pic')
 
-            button Post!
+            button(class='post_button' type='submit') Post!
           div 
-
         div
     #posts 
       div#sort
@@ -32,9 +31,37 @@ block content
       div
       ul
         each txt in data.reverse()
-          ul.single_post
-            div#top
-              div.post_title #{txt.blog_title}
-              button.edit_button Edit
-            div.post_text #{txt.blog_txt}
-            div.post_time #{txt.blog_time}
+          ul(class="single_post", id=txt.blog_id)
+            if txt.blog_edit == 0
+              div#top
+                div.post_title #{txt.blog_title}
+                form(action='/edit' method='POST')
+                  div
+                    label(for='blog')
+                    input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
+                    button(class='edit_button' type='submit') Edit
+                  div
+              div.post_text #{txt.blog_txt}
+              div.post_time #{txt.blog_time}
+            else 
+               #editPost
+                form(action='/update' method='POST')
+                  div
+                    label(for='blog')
+                    input.edit_title(name='edit_title' type='text' required value=`${txt.blog_title}`)
+
+                    label(for='blog')
+                    textarea.edit_text(name='edit_text' rows='1' cols='50' required) #{txt.blog_txt}
+                    
+                    label(for='blog')
+                    input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
+
+                    div#post
+                      p Optional: Change photo
+                      label(for='pic')
+                      input#pic(type='file' name='pic')
+                    div 
+                    button(class='update_button' type='submit') Update!
+                    button(class='cancel_button' type="submit" formaction="/cancel") Cancel
+                  div
+            
