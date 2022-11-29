@@ -17,7 +17,7 @@ html, body {
   background-color: pink;
   /* padding: 50px; */
   font: 14px "Lucida Handwriting", cursive;
-  height: 100%
+  height: 99%
 }
 
 a {
@@ -34,8 +34,14 @@ div#sidebar {
   padding-right: 5px;
   background-color: #ffcffd;
   margin-right: 10px;
-  min-width: 15%;
+  width: 15%;
   height: 100%;
+}
+
+img.title_logo{
+  display: inline-block;
+  align-self: left;
+  width: 99%;
 }
 
 #main {
@@ -189,7 +195,7 @@ button.edit_button, button.delete_button{
   background-color: transparent;
   border: none;
   border-width: 0px;
-  padding: 0px;
+  padding: 5pt;
   margin: 0px;
   border-radius: 0px;
 }
@@ -197,7 +203,7 @@ button.edit_button, button.delete_button{
 img.edit_img, img.delete_img{ 
   background-color: none;
   border: none;
-  height: 30pt;
+  max-height: 20pt;
 }
 
 div#top {

@@ -1,7 +1,10 @@
 extends layout
 
 block content
-  #sidebar This is a sidebar
+  #sidebar
+    img(src='images/logo_3.png' alt='Comfort Games Logo' class="title_logo")
+    //- form(action='/add' method='POST')
+    //-   button(class='post_button' type='submit') Write New Post
   #main
     h1 Comfort Games
     #header Share your favorite comfort games or find something new to try!
@@ -15,9 +18,9 @@ block content
           textarea#new_blog(name='blog' rows='1' cols='50' required placeholder='Type here...')
           
           div.post_bottom
-            p Optional: Include a photo
-            label(for='pic')
-            input#pic(type='file' name='pic')
+            //- p Optional: Include a photo
+            //- label(for='pic')
+            //- input#pic(type='file' name='pic')
 
             button(class='post_button' type='submit') Post!
           div 
@@ -25,10 +28,16 @@ block content
     #posts 
       div#sort
         form(action='/sort' method='POST')
+          <script>
+            var e = document.getElementById("Sortby");
+            var value = e.value;
+          </script>
           p Sort by: 
           select(id='Sortby' name='Sortby')
             option#newest(name = 'newest' value='newest') Newest
             option#oldest(name = 'oldest' value='oldest') Oldest
+            option#az(name = 'az' value='az') TItles A-Z
+            option#za(name = 'za' value='za') Titles Z-A
           button(class='sort_button' type='submit') Sort
       div
       ul
@@ -43,7 +52,7 @@ block content
                     input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
                     button(class='edit_button' type='submit') 
                       img(src='images/Edit_pencil.png' alt='Edit' class="edit_img")
-                    button(class='delete_button' type="submit" formaction="/delete")
+                    button(class='delete_button' type="submit" formaction="/delete" onclick="return confirm('Are you sure?')")
                       img(src='images/Delete_trash.png' alt='Delete' class="delete_img")
                   div
               div.post_text #{txt.blog_txt}
@@ -60,13 +69,11 @@ block content
                     
                     label(for='blog')
                     input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)
-
                     div.post_bottom
-                      p Optional: Change photo
-                      label(for='pic')
-                      input#pic(type='file' name='pic')
-                    div 
-                    button(class='update_button' type='submit') Update!
-                    button(class='cancel_button' type="submit" formaction="/cancel") Cancel
+                      //- p Optional: Change photo
+                      //- label(for='pic')
+                      //- input#pic(type='file' name='pic')
+                      button(class='update_button' type='submit') Update!
+                      button(class='cancel_button' type="submit" formaction="/cancel") Cancel
                   div
             

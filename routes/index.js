@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const sqlite3 = require('sqlite3').verbose();
-var sortby = "blog_id DESC";
+var sortby = "blog_time DESC";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
                      blog_title text NOT NULL,
                      blog_txt text NOT NULL,
                      blog_edit boolean not null default(0),
-                     blog_time DATETIME NOT NULL DEFAULT(datetime('now')));
+                     blog_time DATETIME NOT NULL DEFAULT(DATETIME('now')));
 
                       insert into blog (blog_title, blog_txt)
                       values ('First Post', 'This is a great blog'),
@@ -164,9 +164,13 @@ router.post('/sort', (req, res, next) => {
       console.log("Sorting by: " + req.body.Sortby);
 
       if(req.body.Sortby === "newest") {
-        sortby = "blog_id DESC";
+        sortby = "blog_time DESC";
       } else if (req.body.Sortby === "oldest") {
-        sortby = "blog_id ASC";
+        sortby = "blog_time ASC";
+      } else if (req.body.Sortby === "az") {
+        sortby = "blog_title ASC";
+      } else if (req.body.Sortby === "za") {
+        sortby = "blog_title DESC";
       }
       //NOTE: This is dangerous! you need to sanitize input from the user
       //this is ripe for a exploit! DO NOT use this in production :)
