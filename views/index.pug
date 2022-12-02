@@ -1,5 +1,4 @@
 extends layout
-
 block content
   #sidebar
     img(src='images/logo_3.png' alt='Comfort Games Logo' class="title_logo")
@@ -28,16 +27,26 @@ block content
     #posts 
       div#sort
         form(action='/sort' method='POST')
-          <script>
-            var e = document.getElementById("Sortby");
-            var value = e.value;
-          </script>
+          p(class="javascript")
+            let oldestSelected = "not selected"
+            let azSelected = "not selected"
+            let zaSelected = "not selected"
+          - console.log("chosen sort is: " + chosenSort)
+          if (chosenSort == "blog_time ASC") 
+            p(class="javascript")
+             - oldestSelected = "selected";  
+          else if (chosenSort == "blog_title ASC") 
+            p(class="javascript")
+             - azSelected = "selected"
+          else if (chosenSort == "blog_title DESC") 
+            p(class="javascript")
+             - zaSelected = "selected"
           p Sort by: 
           select(id='Sortby' name='Sortby')
             option#newest(name = 'newest' value='newest') Newest
-            option#oldest(name = 'oldest' value='oldest') Oldest
-            option#az(name = 'az' value='az') TItles A-Z
-            option#za(name = 'za' value='za') Titles Z-A
+            option#oldest(name = 'oldest' value='oldest' selected=oldestSelected) Oldest
+            option#az(name = 'az' value='az' selected=azSelected) TItles A-Z
+            option#za(name = 'za' value='za' selected=zaSelected) Titles Z-A
           button(class='sort_button' type='submit') Sort
       div
       ul

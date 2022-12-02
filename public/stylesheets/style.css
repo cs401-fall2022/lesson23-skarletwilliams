@@ -216,3 +216,8 @@ div#top {
   height: 0pt;
   width: 0pt;
 }
+
+.javascript {
+  color: transparent;
+  font-size: 0pt;
+}

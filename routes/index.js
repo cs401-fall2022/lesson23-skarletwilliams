@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
             console.log("Table exists!");
             db.all(` select blog_id, blog_edit, blog_title, blog_txt, blog_time from blog order by ${sortby}`, (err, rows) => {
               console.log("returning " + rows.length + " records");
-              res.render('index', { title: 'Express', data: rows });
+              res.render('index', { title: 'Comfort Games', data: rows, chosenSort: sortby});
             });
           } else {
             console.log("Creating table and inserting some sample data");
@@ -35,7 +35,7 @@ router.get('/', function (req, res, next) {
                              ('Second Post', 'Oh my goodness blogging is fun');`,
               () => {
                 db.all(` select blog_id, blog_edit, blog_title, blog_txt, blog_time from blog`, (err, rows) => {
-                  res.render('index', { title: 'Express', data: rows });
+                  res.render('index', { title: 'Comfort Games', data: rows, chosenSort: sortby});
                 });
               });
           }
