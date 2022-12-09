@@ -106,6 +106,8 @@ h1 {
 
 .post_text {
   display: block;
+  white-space:pre-wrap;
+  word-wrap: break-word;
   text-align: left;
   padding: 5px 0px 5px 20px;
   font-size: 14pt;

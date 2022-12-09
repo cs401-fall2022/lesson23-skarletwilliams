@@ -50,11 +50,16 @@ block content
           button(class='sort_button' type='submit') Sort
       div
       ul
+        script.
+          let this_post_title = "hi"
+          let this_post_blog = "hi"
         each txt in data
           ul(class="single_post", id=txt.blog_id)
+            - this_post_title = txt.blog_title.replaceAll("&#39;","'");
+            - this_post_blog = txt.blog_txt.replaceAll("&#39;","'");
             if txt.blog_edit == 0
               div#top
-                div.post_title #{txt.blog_title}
+                div.post_title #{this_post_title}
                 form(action='/edit' method='POST')
                   div
                     label(for='blog')
@@ -64,17 +69,17 @@ block content
                     button(class='delete_button' type="submit" formaction="/delete" onclick="return confirm('Are you sure?')")
                       img(src='images/Delete_trash.png' alt='Delete' class="delete_img")
                   div
-              div.post_text #{txt.blog_txt}
+              div.post_text #{this_post_blog}
               div.post_time #{txt.blog_time}
             else 
                #editPost
                 form(action='/update' method='POST')
                   div
                     label(for='blog')
-                    input.edit_title(name='edit_title' type='text' required value=`${txt.blog_title}`)
+                    input.edit_title(name='edit_title' type='text' required value=`${this_post_title}`)
 
                     label(for='blog')
-                    textarea.edit_text(name='edit_text' rows='1' cols='50' required) #{txt.blog_txt}
+                    textarea.edit_text(name='edit_text' rows='1' cols='50' required) #{this_post_blog}
                     
                     label(for='blog')
                     input.post_id(name='post_id' type='text' value=`${txt.blog_id}`)

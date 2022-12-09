@@ -58,10 +58,10 @@ router.post('/add', (req, res, next) => {
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
-      let title = (req.body.title);
-      let blog = (req.body.blog);
+      let cleanTitle = req.body.title.replaceAll("'", "&#39;");
+      let cleanBody = req.body.blog.replaceAll("'", "&#39;");
       db.exec(`insert into blog (blog_title, blog_txt)
-                values ("${title}", "${blog}");`)
+                values ("${cleanTitle}", "${cleanBody}");`)
       //redirect to homepage
       res.redirect('/');
     }
@@ -78,10 +78,7 @@ router.post('/delete', (req, res, next) => {
         exit(1);
       }
       console.log("deleting post with blog id " + req.body.post_id);
-      //NOTE: This is dangerous! you need to sanitize input from the user
-      //this is ripe for a exploit! DO NOT use this in production :)
-      //Try and figure out how why this is unsafe and how to fix it.
-      //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
+      // It is not dangerous to delete in this manner because all we require is the post_id, which is under the hood :)
       db.exec(`delete from blog where blog_id='${req.body.post_id}';`);     
       res.redirect('/');
     }
@@ -145,7 +142,10 @@ router.post('/update', (req, res, next) => {
       //this is ripe for a exploit! DO NOT use this in production :)
       //Try and figure out how why this is unsafe and how to fix it.
       //HINT: the answer is in the XKCD comic on the home page little bobby tables :)
-      db.exec(`update blog set blog_title ='${req.body.edit_title}', blog_edit=0, blog_txt='${req.body.edit_text}', blog_time=datetime('now') where blog_id='${req.body.post_id}';`);     
+      let cleanTitle = req.body.edit_title.replaceAll("'", "&#39;");
+      let cleanBody = req.body.edit_text.replaceAll("'", "&#39;");
+      
+      db.exec(`update blog set blog_title ='${cleanTitle}', blog_edit=0, blog_txt='${cleanBody}', blog_time=datetime('now') where blog_id='${req.body.post_id}';`);     
       res.redirect('/');
     }
   );
